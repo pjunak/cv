@@ -1,0 +1,85 @@
+% Master CV file
+
+%—————————————————————————————————————————————
+% Silence known pdfx & biblatex-ieee warnings right away
+\RequirePackage{silence}
+\WarningFilter{pdfx}{Setting all color commands to rgb}
+\WarningFilter{biblatex}{Macro 'volume+number' undefined}
+
+% Better line breaking in narrow columns
+\setlength{\emergencystretch}{2em}
+\sloppy
+
+% Preamble: document class, packages, and settings
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+\usepackage{paracol}
+
+
+% Font selection
+\iftutex
+  \setmainfont{Lato}
+\else
+  \usepackage[default]{lato}
+\fi
+
+% Color definitions
+\definecolor{VividPurple}{HTML}{3E0097}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\colorlet{heading}{VividPurple}
+\colorlet{headingrule}{VividPurple}
+\colorlet{accent}{VividPurple}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Itemize & rating markers
+\renewcommand{\cvItemMarker}{{\small\textbullet}}
+\renewcommand{\cvRatingMarker}{\faCircle}
+
+% Bibliography setup
+\input{src/pubs-num.tex}
+\addbibresource{src/sample.bib}   % ← include the src/ folder
+
+% disable hyphenation entirely
+\usepackage[none]{hyphenat}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+%————————————————————————
+% Document start
+\begin{document}
+
+\raggedright     % avoid over-justification in tight spots
+
+\name{Petr Junák}
+\tagline{ Programmer, DIY enthusiast \& tinkerer}
+%\photoR{2.5cm}{src/img/face}
+\personalinfo{% 
+  \email{junakpetr@gmail.com}
+  \location{Brno, Czech Republic}
+  \homepage{petr.junak.cz}
+  \linkedin{petr-junak}
+}
+
+\makecvheader
+
+\AtBeginEnvironment{itemize}{\small}
+
+\columnratio{0.6}
+\begin{paracol}{2}
+
+% Sections
+\input{src/experience.tex}
+\input{src/hobbies.tex}
+\input{src/life_philosophy.tex}
+\input{src/education.tex}
+\input{src/languages.tex}
+%\input{src/most_proud_of.tex}
+\input{src/strengths.tex}
+%\input{src/publications.tex}
+%\input{src/referees.tex}
+
+\end{paracol}
+
+\end{document}

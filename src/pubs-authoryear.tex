@@ -1,6 +1,8 @@
 % !TEX root = cv.tex
-% When using APA6 if you need more author names to be listed
-% because you're e.g. the 12th author, add apamaxprtauth=12
+% Optional bibliography configuration for author–year styles (e.g., APA6).
+% Note: Only include one pubs-*.tex file in your cv.tex. If you switch styles,
+% update \input and \addbibresource accordingly.
+
 \usepackage[backend=biber,style=apa6,sorting=ydnt]{biblatex}
 \defbibheading{pubtype}{\cvsubsection{#1}}
 \renewcommand{\bibsetup}{\vspace*{-\baselineskip}}

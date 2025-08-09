@@ -1,16 +1,16 @@
 % !TEX root = cv.tex
-% use ONLY \newpage if you want to force a page break for ONLY the current column
-\newpage
+% Publications section
+% Notes:
+% - Add your publications to src/sample.bib (or rename to your own .bib and update cv.tex \addbibresource accordingly).
+% - Optionally specify your name for bolding in the bibliography using \mynames{Last/First}.
+% - Do not use \nocite{*} unless you want to list all entries from the .bib file.
+
+% \newpage  % Use only if you need to start this section at the top of the next column/page
 
 \cvsection{Publications}
 
-%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
-\mynames{Lim/Lian\bibnamedelima Tze,
-  Wong/Lian\bibnamedelima Tze,
-  Lim/Tracy,
-  Lim/L.\bibnamedelimi T.}
-
-\nocite{*}
+% Example (uncomment and edit):
+% \mynames{Jun\'ak/Petr}
 
 \printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
 

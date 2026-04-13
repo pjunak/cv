@@ -24,6 +24,9 @@
 *.nav
 *.snm
 *.vrb
+*.bcf
+*.run.xml
+*.xmpi
 
 # Editors
 *~

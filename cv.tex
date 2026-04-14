@@ -3,7 +3,6 @@
 % Silence known pdfx & biblatex-ieee warnings right away
 \RequirePackage{silence}
 \WarningFilter{pdfx}{Setting all color commands to rgb}
-\WarningFilter{biblatex}{Macro 'volume+number' undefined}
 
 % Better line breaking in narrow columns
 \setlength{\emergencystretch}{2em}
@@ -35,10 +34,6 @@
 % Itemize & rating markers
 \renewcommand{\cvItemMarker}{{\small\textbullet}}
 \renewcommand{\cvRatingMarker}{\faCircle}
-
-% Bibliography setup
-\input{src/pubs-num.tex}
-\addbibresource{src/sample.bib}   % ← include the src/ folder
 
 % disable hyphenation entirely
 \usepackage[none]{hyphenat}
@@ -75,10 +70,7 @@
 \input{src/life_philosophy.tex}
 \input{src/education.tex}
 \input{src/languages.tex}
-%\input{src/most_proud_of.tex}
 \input{src/strengths.tex}
-%\input{src/publications.tex}
-%\input{src/referees.tex}
 
 \end{paracol}
 

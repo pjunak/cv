@@ -68,3 +68,5 @@ env/
 *.tmp
 *.temp
 *.backup
+
+CLAUDE.md

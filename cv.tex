@@ -1,5 +1,8 @@
 % !TEX root = cv.tex
 %—————————————————————————————————————————————
+% Language switch: 'en' (default) or 'cz'. Overridden by cv-en.tex / cv-cz.tex wrappers.
+\providecommand{\lang}{en}
+
 % Silence known pdfx & biblatex-ieee warnings right away
 \RequirePackage{silence}
 \WarningFilter{pdfx}{Setting all color commands to rgb}
@@ -40,6 +43,17 @@
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
 
+% Translation helpers — driven by \lang ('en' or 'cz').
+% \tr{EN}{CZ} for inline swaps; \enonly / \czonly for whole-block swaps.
+% We resolve \lang once into a TeX \if conditional, which evaluates correctly
+% in both normal typesetting and \edef-based contexts (e.g., \MakeUppercase,
+% \pdfstringdef). Avoids subtle expansion bugs with etoolbox \ifstrequal / \ifdefstring.
+\newif\iflangcz
+\ifdefstring{\lang}{cz}{\langcztrue}{\langczfalse}
+\newcommand{\tr}[2]{\iflangcz #2\else #1\fi}
+\newcommand{\enonly}[1]{\iflangcz\else #1\fi}
+\newcommand{\czonly}[1]{\iflangcz #1\fi}
+
 %————————————————————————
 % Document start
 \begin{document}
@@ -47,7 +61,7 @@
 \raggedright     % avoid over-justification in tight spots
 
 \name{Petr Junák}
-\tagline{ Programmer, DIY enthusiast \& tinkerer}
+\tagline{\tr{Programmer, DIY enthusiast \& tinkerer}{Programátor, DIY nadšenec a kutil}}
 \photoR{3cm}{src/img/face}
 \personalinfo{% 
   \email{junakpetr@gmail.com}

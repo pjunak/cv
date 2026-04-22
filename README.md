@@ -14,13 +14,14 @@ Requires a TeX distribution with pdfLaTeX (or XeLaTeX/LuaLaTeX) and `latexmk`.
 ./build.ps1
 ```
 
-Output: `build/cv.pdf`
+Output: `build/cv-en.pdf` and `build/cv-cz.pdf`
 
 ## Structure
 
 | File | Purpose |
 |------|---------|
-| `cv.tex` | Master document |
+| `cv-en.tex` / `cv-cz.tex` | Language wrappers (set `\lang`, load `cv.tex`) |
+| `cv.tex` | Master document — shared by both languages |
 | `src/experience.tex` | Work experience |
 | `src/education.tex` | Education |
 | `src/languages.tex` | Languages |
@@ -28,6 +29,8 @@ Output: `build/cv.pdf`
 | `src/hobbies.tex` | Hobbies & interests |
 | `src/life_philosophy.tex` | Life philosophy |
 | `altacv.cls` | AltaCV class (unmodified) |
+
+Translations live inline next to English via `\tr{EN}{CZ}` (plus `\enonly{…}` / `\czonly{…}` for whole-block swaps), so both languages stay in sync in one source.
 
 ## License
 

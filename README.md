@@ -16,6 +16,19 @@ Requires a TeX distribution with pdfLaTeX (or XeLaTeX/LuaLaTeX) and `latexmk`.
 
 Output: `build/cv-en.pdf` and `build/cv-cz.pdf`
 
+## Continuous build
+
+Every push to `main` triggers `.github/workflows/build-and-publish.yml`, which compiles both
+PDFs in a TeX Live container and attaches them to the rolling [`latest` release](https://github.com/pjunak/cv/releases/latest):
+
+- <https://github.com/pjunak/cv/releases/latest/download/cv-en.pdf>
+- <https://github.com/pjunak/cv/releases/latest/download/cv-cz.pdf>
+
+[petr.junak.eu](https://petr.junak.eu) downloads these URLs at image-build time, so the website
+always serves the current CV. If the `WEBSITE_DISPATCH_TOKEN` secret is configured, a push here
+also triggers the website rebuild immediately; otherwise the website catches up on its weekly
+scheduled build.
+
 ## Structure
 
 | File | Purpose |

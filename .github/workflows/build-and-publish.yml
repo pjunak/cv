@@ -1,0 +1,73 @@
+name: Build and publish
+
+# On every push to main: compile both language PDFs with TeX Live, attach
+# them to the rolling "latest" release, then ping the website repo
+# (pjunak/petr.junak.eu) so it rebuilds its image with the fresh PDFs.
+#
+# Stable download URLs (used by the website's CI):
+#   https://github.com/pjunak/cv/releases/latest/download/cv-en.pdf
+#   https://github.com/pjunak/cv/releases/latest/download/cv-cz.pdf
+#
+# Optional configuration (Settings → Secrets and variables → Actions):
+#   Secret WEBSITE_DISPATCH_TOKEN  fine-grained PAT with Contents: read/write
+#                                  on pjunak/petr.junak.eu. Without it the
+#                                  dispatch step is skipped and the website
+#                                  picks up new PDFs on its weekly scheduled
+#                                  build (or any manual/push build).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build PDFs and update release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Compile LaTeX (TeX Live container)
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work texlive/texlive:latest \
+            latexmk -pdf cv-en.tex cv-cz.tex
+
+      - name: Update rolling "latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test -s build/cv-en.pdf && test -s build/cv-cz.pdf
+          if ! gh release view latest --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create latest --repo "$GITHUB_REPOSITORY" \
+              --title "Latest CV" \
+              --notes "Rolling release — assets are rebuilt automatically on every push to main."
+          fi
+          gh release upload latest build/cv-en.pdf build/cv-cz.pdf \
+            --repo "$GITHUB_REPOSITORY" --clobber
+
+  dispatch:
+    name: Trigger website rebuild
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping pjunak/petr.junak.eu
+        env:
+          TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::notice::WEBSITE_DISPATCH_TOKEN not set — skipping. The website refreshes PDFs on its weekly scheduled build instead."
+            exit 0
+          fi
+          curl -fsS -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            https://api.github.com/repos/pjunak/petr.junak.eu/dispatches \
+            -d '{"event_type":"cv-updated"}'

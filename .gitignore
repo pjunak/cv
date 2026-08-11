@@ -81,6 +81,3 @@ id_ed25519
 *.tmp
 *.temp
 *.backup
-
-CLAUDE.md
-.claude/

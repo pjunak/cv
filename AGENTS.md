@@ -82,5 +82,6 @@ deployment changes and require explicit verification.
 - Update `README.md` and this file when build, structure, translation, or
   publishing conventions change.
 
-Do not commit generated auxiliary files or credentials. Do not commit, push,
-publish, or rewrite release history unless explicitly requested.
+Do not commit generated auxiliary files or credentials. The global Codex
+instructions govern task commits. Never push, publish, or rewrite release
+history unless explicitly requested.

@@ -76,6 +76,14 @@ deployment changes and require explicit verification.
 
 ## Completion
 
+For prose or agent-guidance-only changes, review the diff, check local links,
+and verify changed commands or contract claims. Runtime builds and operational
+acceptance are required only for the affected behavior below. Reuse successful
+checks on unchanged inputs; preserve complete CI and release gates.
+
+The following applies to CV content, translation, layout, assets and build or
+publishing changes that affect the produced PDFs:
+
 - Build both languages successfully.
 - Inspect both resulting PDFs, not just the LaTeX log.
 - Confirm no overfull boxes or missing-reference errors were introduced.

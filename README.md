@@ -18,6 +18,11 @@ Output: `build/cv-en.pdf` and `build/cv-cz.pdf`
 
 ## Continuous build
 
+Pull requests compile both languages and retain the `cv-pdfs` artifact for 14
+days so both PDFs can be reviewed before merging. Only successful builds on
+`main` publish those same PDFs and trigger the website rebuild. LaTeX errors
+stop the build without waiting for interactive input.
+
 Every push to `main` triggers `.github/workflows/build-and-publish.yml`, which compiles both
 PDFs in a TeX Live container and attaches them to the rolling [`latest` release](https://github.com/pjunak/cv/releases/latest):
 

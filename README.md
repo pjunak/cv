@@ -20,7 +20,7 @@ Output: `build/cv-en.pdf` and `build/cv-cz.pdf`
 
 Pull requests compile both languages and retain the `cv-pdfs` artifact for 14
 days so both PDFs can be reviewed before merging. Only successful builds on
-`main` publish those same PDFs and trigger the website rebuild. LaTeX errors
+`main` publish those same PDFs at the website's download destinations. LaTeX errors
 stop the build without waiting for interactive input.
 
 Every push to `main` triggers `.github/workflows/build-and-publish.yml`, which compiles both
@@ -29,10 +29,9 @@ PDFs in a TeX Live container and attaches them to the rolling [`latest` release]
 - <https://github.com/pjunak/cv/releases/latest/download/cv-en.pdf>
 - <https://github.com/pjunak/cv/releases/latest/download/cv-cz.pdf>
 
-[petr.junak.eu](https://petr.junak.eu) downloads these URLs at image-build time, so the website
-always serves the current CV. If the `WEBSITE_DISPATCH_TOKEN` secret is configured, a push here
-also triggers the website rebuild immediately; otherwise the website catches up on its weekly
-scheduled build.
+[petr.junak.eu](https://petr.junak.eu) links directly to these URLs. Edit LaTeX
+and push; GitHub builds and publishes the PDFs automatically. No manual PDF
+upload, website rebuild or `WEBSITE_DISPATCH_TOKEN` is needed.
 
 ## Structure
 

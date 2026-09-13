@@ -43,7 +43,7 @@ src/life_philosophy.tex Life philosophy
 altacv.cls             Vendored AltaCV class
 build.ps1 / build.sh   Local two-language builds
 .github/workflows/build-and-publish.yml
-                       CI build, rolling release, website dispatch
+                       CI build and rolling PDF release
 ```
 
 ## Editing rules
@@ -63,15 +63,16 @@ build.ps1 / build.sh   Local two-language builds
 ## Publishing
 
 Pushes to `main` compile both PDFs in TeX Live, upload them to the rolling
-GitHub Release tagged `latest`, and optionally dispatch a rebuild of the
-sibling `petr.junak.eu` site. Preserve the stable release asset names:
+GitHub Release tagged `latest`. The sibling `petr.junak.eu` site links directly
+to those generated PDFs; no website rebuild or dispatch token is needed.
+Preserve the stable release asset names:
 
 ```text
 cv-en.pdf
 cv-cz.pdf
 ```
 
-Changes to workflow permissions, release behavior, or the website dispatch are
+Changes to workflow permissions, release behavior, or download URLs are
 deployment changes and require explicit verification.
 
 ## Completion

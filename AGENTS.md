@@ -65,6 +65,8 @@ build.ps1 / build.sh   Local two-language builds
 Pushes to `main` compile both PDFs in TeX Live, upload them to the rolling
 GitHub Release tagged `latest`. The sibling `petr.junak.eu` site links directly
 to those generated PDFs; no website rebuild or dispatch token is needed.
+The portfolio image is deployed separately by `pjunak/infra` to stack `petr`;
+this PDF workflow has no infra target or `INFRA_DISPATCH_TOKEN`.
 Preserve the stable release asset names:
 
 ```text

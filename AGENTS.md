@@ -64,10 +64,8 @@ build.ps1 / build.sh   Local two-language builds
 
 Pushes to `main` compile both PDFs in TeX Live, upload them to the rolling
 GitHub Release tagged `latest`. The sibling `petr.junak.eu` site links directly
-to those generated PDFs; no website rebuild or dispatch token is needed.
-The portfolio image is deployed separately by `pjunak/infra` to stack `petr`;
-this PDF workflow has no infra target or `INFRA_DISPATCH_TOKEN`.
-Preserve the stable release asset names:
+to those generated PDFs; no website rebuild is needed. Preserve the stable
+release asset names:
 
 ```text
 cv-en.pdf
@@ -79,13 +77,8 @@ deployment changes and require explicit verification.
 
 ## Completion
 
-For prose or agent-guidance-only changes, review the diff, check local links,
-and verify changed commands or contract claims. Runtime builds and operational
-acceptance are required only for the affected behavior below. Reuse successful
-checks on unchanged inputs; preserve complete CI and release gates.
-
-The following applies to CV content, translation, layout, assets and build or
-publishing changes that affect the produced PDFs:
+Documentation-only changes need a diff review, link check and verification of
+changed claims. For anything that affects the produced PDFs:
 
 - Build both languages successfully.
 - Inspect both resulting PDFs, not just the LaTeX log.
@@ -93,6 +86,6 @@ publishing changes that affect the produced PDFs:
 - Update `README.md` and this file when build, structure, translation, or
   publishing conventions change.
 
-Do not commit generated auxiliary files or credentials. The global Codex
-instructions govern task commits. Never push, publish, or rewrite release
-history unless explicitly requested.
+Do not commit generated auxiliary files or credentials. Commit locally after
+validation. Never push, publish, or rewrite release history without explicit
+approval.
